@@ -1,0 +1,36 @@
+<Configuration status="warn" >
+    <CustomLevels>
+        <CustomLevel name="VIOLATION" intLevel="150"/>
+        <CustomLevel name="REQUEST" intLevel="350"/>
+    </CustomLevels>
+
+    <Appenders>
+        <RollingFile
+                name="rollingFile"
+                fileName="logs/messages.log"
+                filePattern="logs/messages.%i.log.zip"
+                ignoreExceptions="false">
+            <PatternLayout>
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss} %p%m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="1KB" />
+            </Policies>
+            <DefaultRolloverStrategy max="5" />
+        </RollingFile>
+
+        <File name="File" fileName="logs/győrfi_pál.log">
+            <PatternLayout>
+                <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+            </PatternLayout>
+        </File>
+    </Appenders>
+
+    <Loggers>
+        <Root level="trace">
+            <AppenderRef ref="rollingFile" level="REQUEST"/>
+            <AppenderRef ref="File" level="VIOLATION"/>
+        </Root>
+    </Loggers>
+
+</Configuration>
